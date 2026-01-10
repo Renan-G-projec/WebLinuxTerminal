@@ -16,3 +16,5 @@ class File extends Node {
         this.content = content;
     }
 }
+
+export default File;
