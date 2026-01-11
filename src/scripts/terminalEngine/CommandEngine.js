@@ -14,7 +14,7 @@ function processCommand(user, command) {
 
     const cmd = commands[args.shift()]; // The 1st argument should always be the command itself
     if (!cmd) {
-        return "[ERROR] - Command Not Found";
+        return "<span class='error'>[ERROR] - Command Not Found</span>";
     }
     const success = cmd.run(user, args);
     if (success) {

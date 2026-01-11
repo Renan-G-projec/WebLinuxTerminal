@@ -14,3 +14,11 @@ body {
 p {
     margin: 0;
 }
+
+.error {
+    color: rgb(255, 98, 0);
+}
+
+.machine {
+    color: var(--green);
+}

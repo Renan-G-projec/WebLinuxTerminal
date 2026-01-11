@@ -6,7 +6,7 @@ const commands = {
     cd: {
         argCount: 1,
         successResponse: null,
-        errorResponse: "[ERROR] - Directory not found. \n [USAGE] - cd <path>",
+        errorResponse: "<span class='error'>[ERROR] - Directory not found. <br>[USAGE] - cd &lt;path&gt;.</span>",
 
         /**
          * @description Runs cd (change directory) Command. 
@@ -28,7 +28,7 @@ const commands = {
     },
     mkdir: {
         successResponse: null,
-        errorResponse: "[ERROR] -> Directory already exists.",
+        errorResponse: "<span class='error'>[ERROR] - Directory already exists or invalid directory name.</span>",
 
         /**
          * @description Runs mkdir (make directory) Command. 
@@ -52,7 +52,7 @@ const commands = {
     },
     ls: {
         successResponse: "",
-        errorResponse: "[ERROR] - Directory not found",
+        errorResponse: "<span class='error'>[ERROR] - Directory not found</span>",
 
         /**
          * @description Runs ls (list) Command. 

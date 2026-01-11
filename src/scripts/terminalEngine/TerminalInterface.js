@@ -13,7 +13,7 @@ class TerminalInterface {
         const terminalContent = document.getElementById("terminal-content");
         const newLine = document.createElement('p'); // Not using Unordered List to avoid extra stylesheet lines.
 
-        newLine.innerText = content;
+        newLine.innerHTML = content;
         newLine.style.color = color;
         newLine.style.backgroundColor = backgroundColor;
 
@@ -43,7 +43,7 @@ class TerminalInterface {
                 if (keyEvent.key == "Enter") {
                     const userInputContent = userInput.value;
                     userInput.remove();
-                    newLine.innerText +=  " " + userInputContent; // For display the user History
+                    newLine.innerHTML +=  " " + userInputContent; // For display the user History
                     resolve(userInputContent);
                 }
             })
