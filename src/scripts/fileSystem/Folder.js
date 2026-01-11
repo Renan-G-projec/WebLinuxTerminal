@@ -13,7 +13,7 @@ class Folder extends Node {
 
     /** @param {string} child */
     getChild(child) {
-        return this.children.get(child); // Again, error treating should happen on the TerminalEngine.
+        return this.children.get(child);
     }
 
     /** @returns {string[]} */
