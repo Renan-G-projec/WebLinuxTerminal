@@ -1,7 +1,7 @@
 // The Node class abstracts fileSystem related metadata. It is a generic for a file or a folder.
 /**@abstract*/
 class Node {
-    /** @param {string} name @param {Folder} parent */
+    /** @param {string} name @param {Node} parent */
     constructor(name, parent=null) {
         this.name = name;
         this.parent = parent;
@@ -21,7 +21,7 @@ class Node {
             current = current.parent;
         }
 
-        return "/" + path.join("/");
+        return path.join("/");
     }
 
 }
