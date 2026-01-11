@@ -1,0 +1,16 @@
+:root {
+    --bg-first: #12041c;
+    --bg-second: #320750;
+    --green: #3df744;
+    --cyan: #36f8f5;
+}
+
+body {
+    background-color: var(--bg-first);
+    color: white;
+    font-family: "JetBrains Mono", monospace;
+}
+
+p {
+    margin: 0;
+}
