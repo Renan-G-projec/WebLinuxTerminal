@@ -43,7 +43,7 @@ class TerminalInterface {
                 if (keyEvent.key == "Enter") {
                     const userInputContent = userInput.value;
                     userInput.remove();
-                    newLine.innerText += userInputContent; // For display the user History
+                    newLine.innerText +=  " " + userInputContent; // For display the user History
                     resolve(userInputContent);
                 }
             })
