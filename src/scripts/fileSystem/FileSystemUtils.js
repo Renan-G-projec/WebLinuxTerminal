@@ -50,9 +50,9 @@ class FileSystemUtils {
     */
 
     static getFileSystemNodeInstanceByPath(path, root, startDirectory) {
-        if (!this.isValidPath(path)) return null;
+        if (!FileSystemUtils.isValidPath(path)) return null;
 
-        const isAbsolute = this.isAbsolute(path);
+        const isAbsolute = FileSystemUtils.isAbsolute(path);
         const pathArray = path.split("/").filter(nodeName => nodeName !== "."); // Removing the "." form path as they represents the current directory.;
         let currentDirectory = startDirectory;
 
@@ -91,6 +91,38 @@ class FileSystemUtils {
         }
 
         return null;
+    }
+
+    /**
+     * @description Given a path, creates recursively
+     * folders, checking if they already exist at current
+     * folder.
+     * @param {string} path
+     * @param {Folder} root
+     * @param {Folder} startDirectory
+     * @returns {boolean} Sucess/error.
+    */
+
+    static createDirectoriesByPath(path, root, startDirectory) {
+        if (!FileSystemUtils.isValidPath(path)) return false;
+
+        const isAbsolute = FileSystemUtils.isAbsolute(path);
+        const pathArray = path.split("/").filter(nodeName => nodeName !== ".");
+        let currentDirectory = isAbsolute ? root : startDirectory; // Defines the starting point only one time.
+
+
+        for (let node of pathArray) {
+            const child = node === ".." ? currentDirectory.parent || currentDirectory : currentDirectory.getChild(node);
+            if (!child) {
+                const child = new Folder(node, currentDirectory)
+                currentDirectory.addChild(child);
+                currentDirectory = child;
+            } else {
+                currentDirectory = child;
+            }
+        }
+
+        return true;
     }
 }
 

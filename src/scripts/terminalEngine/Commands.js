@@ -40,7 +40,7 @@ const commands = {
             for (const arg of args) {
                 if (!FileSystemUtils.isValidPath(arg)) return false;
                 if (arg.includes("/")) {
-                    // TO-DO: Make the command check for a compose path. So, if the folder does not exist, it creates.
+                    return FileSystemUtils.createDirectoriesByPath(arg, user.root, user.currentDirectory);
                 } else {
                     const folder = new Folder(arg, user.currentDirectory);
                     user.currentDirectory.addChild(folder);

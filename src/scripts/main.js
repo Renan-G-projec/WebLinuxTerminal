@@ -4,7 +4,7 @@ import TerminalInterface from "./terminalEngine/TerminalInterface.js";
 import processCommand from "./terminalEngine/CommandEngine.js"
 
 const root = new Folder("", null);
-const user = new User(prompt("Choose a Name:"), root, false);
+const user = new User(prompt("Choose a Name:"), root, root, false);
 
 // MAIN LOOP
 while (true) {
