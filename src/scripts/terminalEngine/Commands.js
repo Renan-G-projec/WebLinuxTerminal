@@ -39,12 +39,7 @@ const commands = {
         run(user, args) {
             for (const arg of args) {
                 if (!FileSystemUtils.isValidPath(arg)) return false;
-                if (arg.includes("/")) {
-                    return FileSystemUtils.createDirectoriesByPath(arg, user.root, user.currentDirectory);
-                } else {
-                    const folder = new Folder(arg, user.currentDirectory);
-                    user.currentDirectory.addChild(folder);
-                }
+                FileSystemUtils.createDirectoriesByPath(arg, user.root, user.currentDirectory);
             }
 
             return true;
@@ -52,7 +47,7 @@ const commands = {
     },
     ls: {
         successResponse: "",
-        errorResponse: "<span class='error'>[ERROR] - Directory not found</span>",
+        errorResponse: "",
 
         /**
          * @description Runs ls (list) Command. 
@@ -64,9 +59,22 @@ const commands = {
             if (args.length == 0 || !args) {
                 this.successResponse = user.currentDirectory.listAllChildren().join("  ")
                 return true;
+            } else {
+                const wishedPath = args[0]; 
+                if (!FileSystemUtils.isValidPath(wishedPath)) {
+                    this.errorResponse = "<span class='error'>[ERROR] - Invalid Path</span>";
+                    return false
+                };
+
+                const wishedDir = FileSystemUtils.getFileSystemNodeInstanceByPath(wishedPath, user.root, user.currentDirectory);
+                if (!wishedDir) {
+                    this.errorResponse = "<span class='error'>[ERROR] - Directory not found</span>";
+                    return false;
+                };
+
+                this.successResponse = wishedDir.listAllChildren().join("  ");
+                return true;
             }
-            // TO-DO: implement a way to the user provide a path. Like: ls .. or even ls ./folder/otherFolder etc.
-            return false;
         }
     }
 }
