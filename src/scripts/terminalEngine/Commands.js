@@ -12,7 +12,7 @@ const commands = {
          * @description Runs cd (change directory) Command. 
          * @param {User} user 
          * @param {string[]} args  
-         * @returns {boolean} If it was sucessiful.
+         * @returns {boolean} If it was sucessful.
         */
         run: (user, args) => {
             if (!args[0]) return false;
@@ -34,7 +34,7 @@ const commands = {
          * @description Runs mkdir (make directory) Command. 
          * @param {User} user 
          * @param {string[]} args  
-         * @returns {boolean} If it was sucessiful.
+         * @returns {boolean} If it was sucessful.
         */
         run(user, args) {
             for (const arg of args) {
@@ -53,7 +53,7 @@ const commands = {
          * @description Runs ls (list) Command. 
          * @param {User} user 
          * @param {string[]} args  
-         * @returns {boolean} If it was sucessiful.
+         * @returns {boolean} If it was sucessful.
         */
         run(user, args) {
             if (args.length == 0 || !args) {
@@ -75,6 +75,34 @@ const commands = {
                 this.successResponse = wishedDir.listAllChildren().join("  ");
                 return true;
             }
+        }
+    },
+    touch: {
+        successResponse: null,
+        errorResponse: "",
+
+        /**
+         * @description Runs touch command.
+         * @param {User} user
+         * @param {string[]} args
+         * @returns {boolean} If it was successful
+        */
+
+        run(user, args) {
+            if (!args || args.length == 0) {
+                this.errorResponse = "<span class='error'>[ERROR] - At least 1 argument Required. <br> [USAGE] - touch <path></span>";
+                return false;
+            } else {
+                for (const arg of args) {
+                    const success = FileSystemUtils.createFileByPath(arg, user.root, user.currentDirectory);
+                    if (!success) {
+                        this.errorResponse = "<span class='error'>[ERROR] - Invalid path(s).</span>";
+                        return false
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

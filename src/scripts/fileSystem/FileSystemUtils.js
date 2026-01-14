@@ -1,7 +1,8 @@
 /* Ad Maiorem Dei Gloriam */
 
-import Folder from "./Folder.js";
 import Node from "./Node.js";
+import File from "./File.js"
+import Folder from "./Folder.js";
 
 /** 
   * @description This static class contains 
@@ -121,6 +122,43 @@ class FileSystemUtils {
                 currentDirectory = child;
             }
         }
+
+        return true;
+    }
+
+    /** 
+     * @description Given a path, creates a file
+     * at the given path. WARNING - It does not create
+     * the folders, returning a error if it does not
+     * exists.
+     * @param {string} path
+     * @param {Folder} root
+     * @param {Folder} startDirectory
+     * @returns {boolean} Success/error.
+    */
+    
+    static createFileByPath(path, root, startDirectory) {
+        if (!FileSystemUtils.isValidPath(path)) return false;
+
+        const invalidNames = ["..", ".", ""]
+
+        const pathArray = path.split("/").filter(nodeName => nodeName != ".");
+        const fileName = pathArray.pop();
+
+        if (invalidNames.includes(fileName)) return false;
+
+        let finalDirectory;
+
+        if (pathArray.length === 0) {
+            finalDirectory = FileSystemUtils.isAbsolute(path) ? root : startDirectory;
+        } else {
+            finalDirectory = FileSystemUtils.getFileSystemNodeInstanceByPath(pathArray.join("/"), root, startDirectory);
+        }
+
+        if (!finalDirectory || !(finalDirectory instanceof Folder)) return false;
+
+        const child = new File(fileName, finalDirectory);
+        finalDirectory.addChild(child);
 
         return true;
     }
