@@ -18,7 +18,11 @@ class Folder extends Node {
 
     /** @returns {string[]} */
     listAllChildren() {
-        return Array.from(this.children.keys());
+        const childrenArray = Array.from(this.children.values());
+        return childrenArray.map((children) => {
+            let fileOrFolder = (children instanceof Folder) ? "folder" : "file";
+            return `<span class='ls-${fileOrFolder}'> ${children.name}${fileOrFolder === "folder" ? "/" : ""}</span>`;
+        });
     }
 }
 

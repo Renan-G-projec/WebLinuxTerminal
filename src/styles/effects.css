@@ -22,3 +22,11 @@ p {
 .machine {
     color: var(--green);
 }
+
+.ls-file {
+    color: var(--cyan);
+}
+
+.ls-folder {
+    color: white;
+}
