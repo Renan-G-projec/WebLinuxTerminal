@@ -54,44 +54,22 @@ class FileSystemUtils {
         if (!FileSystemUtils.isValidPath(path)) return null;
 
         const isAbsolute = FileSystemUtils.isAbsolute(path);
-        const pathArray = path.split("/").filter(nodeName => nodeName !== "."); // Removing the "." form path as they represents the current directory.;
-        let currentDirectory = startDirectory;
+        const pathArray = path.split("/").filter(nodeName => nodeName !== "." && nodeName != ""); // Removing the "." (current directory) and "" (root).
+        const lastElement = pathArray[pathArray.length - 1]; // Can be both file or folder
+        let currentDirectory = isAbsolute ? root : startDirectory;
 
-        if (isAbsolute) {
-            currentDirectory = root;
-            pathArray.shift() // Deletes the "" that is the root
-
-            for (const element of pathArray) {
-                if (!(currentDirectory instanceof Folder)) return null;
-
+        for (const element of pathArray) {
+            if (element === "..") {
+                currentDirectory = currentDirectory.parent || root; // Short circuit in order to prevent the user for going backwards in the root.
+            } else {
+                if (!(currentDirectory instanceof Folder) && element != lastElement) return null;
                 let child = currentDirectory.getChild(element);
                 if (!child) return null;
                 currentDirectory = child;
             }
-
-            return currentDirectory;
-        } 
-        
-        if (!isAbsolute) { // Not an elif for be more readable
-            currentDirectory = startDirectory;
-
-
-            for (const element of pathArray) {
-                if (element === "..") {
-                    currentDirectory = currentDirectory.parent || root; // Short circuit in ordder to prevent the user for going backwards in the root.
-                } else {
-                    if (!(currentDirectory instanceof Folder)) return null;
-                    let child = currentDirectory.getChild(element);
-                    if (!child) return null;
-                    currentDirectory = child;
-                }
-            }
-
-            return currentDirectory;
-            
         }
 
-        return null;
+        return currentDirectory;
     }
 
     /**
