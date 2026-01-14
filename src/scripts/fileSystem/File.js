@@ -1,3 +1,4 @@
+/* Ad Maiorem Dei Gloriam */
 import Node from "./Node.js";
 
 class File extends Node {

@@ -1,3 +1,5 @@
+/* Ad Maiorem Dei Gloriam */
+
 import commands from "./Commands.js";
 import User from "../userRelated/User.js";
 

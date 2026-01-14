@@ -1,3 +1,4 @@
+/* Ad Maiorem Dei Gloriam */
 import Folder from "./fileSystem/Folder.js";
 import User from "./userRelated/User.js";
 import TerminalInterface from "./terminalEngine/TerminalInterface.js";

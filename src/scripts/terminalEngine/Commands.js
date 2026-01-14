@@ -1,7 +1,15 @@
+/* Ad Maiorem Dei Gloriam */
 import FileSystemUtils from "../fileSystem/FileSystemUtils.js";
 import Folder from "../fileSystem/Folder.js";
 import User from "../userRelated/User.js";
 
+/*
+    HOW TO ADD A COMMAND
+    1. Create another object inside the `commands` object with the new commands's name.
+    2. Add a default success response with the attribute `successResponse`.
+    3. Add a default error response with the attribute `errorResponse`.
+    4. Add a run() method that receives the user instance and the arguments `run(user, args)`.
+*/
 const commands = {
     cd: {
         argCount: 1,

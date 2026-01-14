@@ -1,3 +1,4 @@
+/* Ad Maiorem Dei Gloriam */
 import Node from "./Node.js";
 
 class Folder extends Node {
@@ -21,7 +22,7 @@ class Folder extends Node {
         const childrenArray = Array.from(this.children.values());
         return childrenArray.map((children) => {
             let fileOrFolder = (children instanceof Folder) ? "folder" : "file";
-            return `<span class='ls-${fileOrFolder}'> ${children.name}${fileOrFolder === "folder" ? "/" : ""}</span>`;
+            return `<span class='ls-${fileOrFolder}'>${children.name}${fileOrFolder === "folder" ? "/" : ""}</span>`;
         });
     }
 }

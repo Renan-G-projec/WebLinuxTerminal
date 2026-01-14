@@ -1,3 +1,4 @@
+/* Ad Maiorem Dei Gloriam */
 // The Node class abstracts fileSystem related metadata. It is a generic for a file or a folder.
 /**@abstract*/
 class Node {

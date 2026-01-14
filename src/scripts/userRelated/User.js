@@ -1,3 +1,4 @@
+/* Ad Maiorem Dei Gloriam */
 import Folder from "../fileSystem/Folder.js";
 
 class User {
