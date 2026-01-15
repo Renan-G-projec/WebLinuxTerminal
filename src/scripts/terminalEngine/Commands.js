@@ -2,6 +2,7 @@
 import FileSystemUtils from "../fileSystem/FileSystemUtils.js";
 import Folder from "../fileSystem/Folder.js";
 import User from "../userRelated/User.js";
+import TerminalInterface from "./TerminalInterface.js";
 
 /*
     HOW TO ADD A COMMAND
@@ -111,6 +112,18 @@ const commands = {
             }
 
             return true;
+        }
+    },
+    clear: {
+        successResponse: null,
+        errorResponse: null,
+
+        /**
+         * @description Cleans up the screen (Erases all content). 
+        */
+
+        run() {
+            TerminalInterface.clearTerminal();
         }
     }
 }

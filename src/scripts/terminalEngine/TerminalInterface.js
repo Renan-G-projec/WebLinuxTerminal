@@ -49,6 +49,13 @@ class TerminalInterface {
             })
         })
     }
+
+    /**
+     * @description Cleans up the screen (Erases all content). 
+    */
+    static clearTerminal() {
+        document.querySelector(".terminal-content").innerHTML = "";
+    }
 }
 
 export default TerminalInterface;
