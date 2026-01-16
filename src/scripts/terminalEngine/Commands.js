@@ -1,6 +1,7 @@
 /* Ad Maiorem Dei Gloriam */
 import FileSystemUtils from "../fileSystem/FileSystemUtils.js";
 import Folder from "../fileSystem/Folder.js";
+import File from "../fileSystem/File.js"; 
 import User from "../userRelated/User.js";
 import TerminalInterface from "./TerminalInterface.js";
 
@@ -160,17 +161,12 @@ const commands = {
             // SHOW CONTENT OPTION
             for (const filePath of args) {
                 const currentFile = FileSystemUtils.getFileSystemNodeInstanceByPath(filePath, user.root, user.currentDirectory);
-                if (!currentFile) {
+                if (!currentFile || !(currentFile instanceof File)) {
                     this.errorResponse = "<span class='error'>[ERROR] - The declared path either does not exist or is a folder.</span>"
                     return false;
-                };
-                try {
-                    this.successResponse += currentFile.getContent() + "<br>";
-                } catch {
-                    this.errorResponse = "<span class='error'> [ERROR] - tried to access a folder's content. </span>";
-                    return false;
-                }
 
+                }
+                this.successResponse += currentFile.getContent() + "<br>";
                 return true;
             }
         }
