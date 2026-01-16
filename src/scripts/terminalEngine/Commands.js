@@ -105,7 +105,7 @@ const commands = {
                 for (const arg of args) {
                     const success = FileSystemUtils.createFileByPath(arg, user.root, user.currentDirectory);
                     if (!success) {
-                        this.errorResponse = "<span class='error'>[ERROR] - Invalid path(s).</span>";
+                        this.errorResponse = "<span class='error'>[ERROR] - Invalid path(s) or already existing file.</span>";
                         return false
                     }
                 }
@@ -124,6 +124,55 @@ const commands = {
 
         run() {
             TerminalInterface.clearTerminal();
+        }
+    },
+    cat: {
+        successResponse: "",
+        errorResponse: "",
+
+        /**
+         * @description Runs the cat (concatenate) command,
+         * which can: Show a file's content, insert content
+         * on a file or even put other file content in 
+         * another file
+         * @param {User} user
+         * @param {string[]} args
+         * @returns {boolean} Success/Error 
+        */
+        run(user, args) {
+            if (!args || args.length === 0) {
+                this.errorResponse = "<span class='error'>[ERROR] - No input file path provided.</span>";
+                return false;
+            }
+
+            // INSERT CONTENT OPTION
+            if (args[0] === ">") {
+                // To do: Implement a way to handle this state with a promisse.
+                return true;
+            }
+
+            // CONCATENATE CONTENT OPTION
+            if (args[1] === ">>") {
+                // To do: Implement a way to handle this.
+                return true;
+            }
+
+            // SHOW CONTENT OPTION
+            for (const filePath of args) {
+                const currentFile = FileSystemUtils.getFileSystemNodeInstanceByPath(filePath, user.root, user.currentDirectory);
+                if (!currentFile) {
+                    this.errorResponse = "<span class='error'>[ERROR] - The declared path either does not exist or is a folder.</span>"
+                    return false;
+                };
+                try {
+                    this.successResponse += currentFile.getContent() + "<br>";
+                } catch {
+                    this.errorResponse = "<span class='error'> [ERROR] - tried to access a folder's content. </span>";
+                    return false;
+                }
+
+                return true;
+            }
         }
     }
 }

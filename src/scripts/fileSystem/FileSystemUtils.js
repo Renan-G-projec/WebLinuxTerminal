@@ -135,6 +135,8 @@ class FileSystemUtils {
 
         if (!finalDirectory || !(finalDirectory instanceof Folder)) return false;
 
+        if (finalDirectory.children.has(fileName) && (finalDirectory.getChild(fileName) instanceof File)) return false;
+
         const child = new File(fileName, finalDirectory);
         finalDirectory.addChild(child);
 
