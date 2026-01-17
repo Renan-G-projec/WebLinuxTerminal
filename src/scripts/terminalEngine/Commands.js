@@ -140,7 +140,7 @@ const commands = {
          * @param {string[]} args
          * @returns {boolean} Success/Error 
         */
-        run(user, args) {
+        async run(user, args) {
             if (!args || args.length === 0) {
                 this.errorResponse = "<span class='error'>[ERROR] - No input file path provided.</span>";
                 return false;
@@ -166,9 +166,9 @@ const commands = {
                     return false;
 
                 }
-                this.successResponse += currentFile.getContent() + "<br>";
-                return true;
+                this.successResponse += currentFile.getContent();
             }
+            return true;
         }
     }
 }

@@ -16,6 +16,11 @@ class File extends Node {
     setContent(content) {
         this.content = content;
     }
+
+    /** @param {string} content  @returns {void}*/
+    appendContent(content) {
+    this.content += "<br>" + content;
+    }
 }
 
 export default File;
