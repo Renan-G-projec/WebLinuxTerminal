@@ -10,5 +10,5 @@ const user = new User(prompt("Choose a Name:"), root, root, false);
 // MAIN LOOP
 while (true) {
     const response = await TerminalInterface.writeLineAndTakeInput(`<span class='machine'>${user.name}@WebLinuxTerminal</span>: ~${user.currentDirectory.getAbsolutePath()} ${user.rooted?'#':'$'} `);
-    TerminalInterface.writeLine(processCommand(user, response));
+    TerminalInterface.writeLine(await processCommand(user, response.content));
 }

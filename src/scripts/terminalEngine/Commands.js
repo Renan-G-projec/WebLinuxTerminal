@@ -149,6 +149,33 @@ const commands = {
             // INSERT CONTENT OPTION
             if (args[0] === ">") {
                 // To do: Implement a way to handle this state with a promisse.
+                let editingFile = FileSystemUtils.getFileSystemNodeInstanceByPath(args[1], user.root, user.currentDirectory);
+                let stillEditing = true;
+                let contentBuffer = "";
+
+                // Creating file if it does not exists
+                if (!editingFile) {
+                    const successCreating = FileSystemUtils.createFileByPath(args[1], user.root, user.currentDirectory);
+                    if (!successCreating) {
+                        this.errorResponse = "<span class='error'>[ERROR] - Directory not found.</span>";
+                        return false;
+                    }
+                    // Updating current file
+                    editingFile = FileSystemUtils.getFileSystemNodeInstanceByPath(args[1], user.root, user.currentDirectory);
+                }
+
+                
+
+                while (stillEditing) {
+                    const newLineResponse = await TerminalInterface.writeLineAndTakeInput(": ");
+                    if (newLineResponse.status == "text") {
+                        contentBuffer += newLineResponse.content += "<br>";
+                    } else if (newLineResponse.status = "EOE") {
+                        stillEditing = false;
+                        editingFile.setContent(contentBuffer);
+                    }
+                }
+
                 return true;
             }
 

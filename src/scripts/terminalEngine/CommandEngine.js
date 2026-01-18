@@ -10,7 +10,7 @@ import User from "../userRelated/User.js";
  * @param {string} command 
  * @returns {string} The success/Error Message
 */
-function processCommand(user, command) {
+async function processCommand(user, command) {
     const processedCommand = command.trim();
     const args = processedCommand.split(" ");
 
@@ -18,7 +18,7 @@ function processCommand(user, command) {
     if (!cmd) {
         return "<span class='error'>[ERROR] - Command Not Found</span>";
     }
-    const success = cmd.run(user, args);
+    const success = await cmd.run(user, args);
     if (success) {
         return cmd.successResponse;
     } else {

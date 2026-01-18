@@ -39,12 +39,18 @@ class TerminalInterface {
             newLine.appendChild(userInput);
             userInput.focus();
 
-            userInput.addEventListener("keydown", (keyEvent) => {
+            userInput.addEventListener("keydown", async (keyEvent) => {
                 if (keyEvent.key == "Enter") {
                     const userInputContent = userInput.value;
                     userInput.remove();
                     newLine.innerHTML +=  " " + userInputContent; // For display the user History
-                    resolve(userInputContent);
+                    resolve({status: "text", content: userInputContent});
+                }
+
+                if (keyEvent.ctrlKey && keyEvent.key.toLowerCase() == "d") {
+                    keyEvent.preventDefault();
+                    userInput.remove();
+                    resolve({status: "EOE", content: null});
                 }
             })
         })
