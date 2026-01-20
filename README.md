@@ -26,6 +26,7 @@ The commands are constantly updated. Here's the current one's:
 - `ls [path]` - list all the contents in a directory!
 - `mkdir <path> [paths...]` - creates new folders!
 - `touch <path> [paths...]` - creates new files!
+- `cat [options: > (overwrite), >> (concatenate)] <path> [paths...]`
 
 ----
 ## 🤝 Contributing
