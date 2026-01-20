@@ -19,7 +19,7 @@ class File extends Node {
 
     /** @param {string} content  @returns {void}*/
     appendContent(content) {
-    this.content += "<br>" + content;
+        this.content += "<br>" + content;
     }
 }
 

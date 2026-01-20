@@ -146,9 +146,9 @@ const commands = {
                 return false;
             }
 
-            // INSERT CONTENT OPTION
-            if (args[0] === ">") {
-                // To do: Implement a way to handle this state with a promisse.
+            // INSERT/CONCATENATE CONTENT OPTION
+            // The unique diference will be the function used: File.setContent() for insert and File.appendContent() for concatenate.
+            if (args[0] === ">" || args[0] === ">>") {
                 let editingFile = FileSystemUtils.getFileSystemNodeInstanceByPath(args[1], user.root, user.currentDirectory);
                 let stillEditing = true;
                 let contentBuffer = "";
@@ -172,16 +172,15 @@ const commands = {
                         contentBuffer += newLineResponse.content += "<br>";
                     } else if (newLineResponse.status = "EOE") {
                         stillEditing = false;
-                        editingFile.setContent(contentBuffer);
+
+                        if (args[0] === ">") {
+                            editingFile.setContent(contentBuffer);
+                        } else {
+                            editingFile.appendContent(contentBuffer);
+                        }
                     }
                 }
 
-                return true;
-            }
-
-            // CONCATENATE CONTENT OPTION
-            if (args[1] === ">>") {
-                // To do: Implement a way to handle this.
                 return true;
             }
 
